@@ -145,3 +145,12 @@ const startData = companies.sort((a, b) => (a.start > b.start ? 1 : -1));
 // sort ages
 const descending = ages.sort((a, b) => b - a);
 // console.log(descending);
+
+// Combined methods
+const combined = ages
+  .map(age => age * 2)
+  .filter(age => age >= 40)
+  .sort((a, b) => a - b)
+  .reduce((a, b) => a + b, 0);
+
+// console.log(combined);
