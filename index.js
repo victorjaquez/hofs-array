@@ -1,18 +1,28 @@
-const serverResponse = {
-  essentials: {
-    price: 1.99,
-    desc: "The Bare necessities",
-    offerID: 123
+const nbaData = {
+  bulls: {
+    conference: "eastern",
+    city: "Chicago",
+    gamesWon: 23
   },
-  plus: {
-    price: 3.99,
-    desc: "The Next level",
-    offerID: 345
+  lakers: {
+    conference: "western",
+    city: "Los Angeles",
+    gamesWon: 18
   },
-  pro: {
-    price: 5.99,
-    desc: "The Boss level",
-    offerID: 678
+  warriors: {
+    conference: "western",
+    city: "Oakland",
+    gamesWon: 38
+  },
+  pelicans: {
+    conference: "eastern",
+    city: "New Orleans",
+    gamesWon: 15
+  },
+  suns: {
+    conference: "western",
+    city: "Phoenix",
+    gamesWon: 10
   }
 };
 
@@ -31,15 +41,18 @@ const companies = [
 const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 
 /* ----- reduce ----- */
-// Convert server response
-function parseServerResponse(serverResponse) {
-  return Object.entries(serverResponse).reduce((response, [label, data]) => {
-    response.push({ ...data, label });
-    return response;
+// convert nba data to have team name as a key value pair
+function parseNbaData(nbaData) {
+  return Object.entries(nbaData).reduce((newData, [teamName, data]) => {
+    newData.push({ ...data, teamName });
+    return newData;
   }, []);
 }
-let data = parseServerResponse(serverResponse);
-// console.log(Object.entries(serverResponse));
+
+let newNbaData = parseNbaData(nbaData);
+// console.log(Object.entries(nbaData));
+// console.log("---------------");
+// console.log(newNbaData);
 
 // Sum of ages
 // let ageSum = 0;
@@ -62,15 +75,36 @@ const totalYears = companies.reduce(
 );
 // console.log(totalYears);
 
+let vals = [5, 4, 9, 2, 1];
+
+// function findMax(acc, val) {
+//   if (val > acc) {
+//     acc = val;
+//   }
+//   return acc;
+// }
+
+// let biggest = vals.reduce((acc, val) => {
+//   if (val > acc) {
+//     acc = val;
+//   }
+//   return acc;
+// });
+
+let biggest = vals.reduce((acc, val) => (val > acc ? val : acc));
+// let biggest = vals.reduce((a, b) => (b > a ? b : a), 8);
+
+// console.log(biggest);
+
 /* ----- forEach ----- */
 
 // for (let i = 0; i < companies.length; i++) {
 //   console.log(companies[i].name);
 // }
 
-companies.forEach(company => {
-  console.log(company.category);
-});
+// companies.forEach(company => {
+//   console.log(company.category);
+// });
 
 /* ----- filter ----- */
 
@@ -85,8 +119,8 @@ companies.forEach(company => {
 //   if (age >= 21) return true;
 // });
 
-const canDrink = ages.filter(age => age >= 21);
-console.log(canDrink);
+// const canDrink = ages.filter(age => age >= 21);
+// console.log(canDrink);
 
 // filter retail companies
 // const retailCompanies = companies.filter(company => {
